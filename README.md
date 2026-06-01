@@ -25,7 +25,6 @@ Una calculadora hecha con React, TypeScript y Vite.
 - Muestra `ERROR` para resultados negativos o mayores a 999,999,999
 - Punto decimal
 - Botón `+/-` para cambiar el signo
-- Decoraciones kawaii animadas ✨
 
 ---
 
