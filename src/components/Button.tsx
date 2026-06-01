@@ -1,4 +1,4 @@
-import type { ButtonVariant } from './ButtonGrid'
+import type { ButtonVariant } from '../calculator/buttons'
 
 interface Props {
   label: string
