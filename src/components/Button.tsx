@@ -1,11 +1,13 @@
+import type { ButtonVariant } from './ButtonGrid'
+
 interface Props {
   label: string
   onClick: () => void
-  variant?: 'number' | 'operator' | 'action' | 'equals'
+  variant?: ButtonVariant
 }
 
 const Button = ({ label, onClick, variant = 'number' }: Props) => (
-  <button className={`btn btn-${variant}`} onClick={onClick}>
+  <button className={`btn btn-${variant}`} type="button" onClick={onClick} aria-label={label}>
     {label}
   </button>
 )

@@ -1,6 +1,8 @@
 import Button from './Button'
 
-type ButtonDef = { label: string; variant: 'number' | 'operator' | 'action' | 'equals' }
+export type ButtonVariant = 'number' | 'operator' | 'action' | 'equals'
+
+type ButtonDef = { label: string; variant: ButtonVariant }
 
 interface Props {
   buttons: ButtonDef[]

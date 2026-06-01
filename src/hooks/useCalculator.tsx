@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-type Operation = '+' | '-' | '*' | '/' | '%' | null
+type Operation = '+' | '-' | '*' | '/' | null
 
 interface CalculatorState {
   display: string
@@ -19,14 +19,13 @@ const initialState: CalculatorState = {
   shouldClearDisplay: false,
 }
 
-const isError = (value: number) => value < 0 || value > MAX_VALUE
+const isError = (value: number) => !Number.isFinite(value) || Math.abs(value) > MAX_VALUE
 
 const applyOperation = (prev: number, current: number, op: Operation): number => {
   if (op === '+') return prev + current
   if (op === '-') return prev - current
   if (op === '*') return prev * current
   if (op === '/') return prev / current
-  if (op === '%') return prev % current
   return current
 }
 
@@ -40,6 +39,7 @@ const formatResult = (value: number): string => {
 
 export const useCalculator = () => {
   const [state, setState] = useState<CalculatorState>(initialState)
+  const [memory, setMemory] = useState(0)
 
   const inputDigit = (digit: string) => {
     setState(prev => {
@@ -82,7 +82,38 @@ export const useCalculator = () => {
     })
   }
 
+  const applyPercent = () => {
+    setState(prev => {
+      if (prev.display === 'ERROR') return prev
+      const result = parseFloat(prev.display) / 100
+      return { ...prev, display: formatResult(result), shouldClearDisplay: true }
+    })
+  }
+
+  const addMemory = () => {
+    if (state.display !== 'ERROR') setMemory(prev => prev + parseFloat(state.display))
+  }
+
+  const subtractMemory = () => {
+    if (state.display !== 'ERROR') setMemory(prev => prev - parseFloat(state.display))
+  }
+
+  const recallMemory = () => {
+    setState(prev => ({ ...prev, display: formatResult(memory), shouldClearDisplay: true }))
+  }
+
   const clear = () => setState(initialState)
 
-  return { display: state.display, inputDigit, inputOperation, calculate, toggleSign, clear }
+  return {
+    display: state.display,
+    inputDigit,
+    inputOperation,
+    calculate,
+    toggleSign,
+    clear,
+    applyPercent,
+    addMemory,
+    subtractMemory,
+    recallMemory,
+  }
 }
