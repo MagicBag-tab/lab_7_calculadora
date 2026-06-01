@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# 🌟 Calculadora
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una calculadora hecha con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+🔗 **Deploy:** [https://calculadora-sarita.netlify.app/](https://calculadora-sarita.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Runtime / Package manager:** Bun
+- **Framework:** React 19 + Vite
+- **Lenguaje:** TypeScript
+- **Testing:** Vitest + Testing Library
+- **Linting:** ESLint (Standard style, sin punto y coma, max 120 chars)
+- **Documentación:** Storybook
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Funcionalidades
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Suma, resta, multiplicación, división y módulo
+- Operaciones encadenadas con resultados intermedios
+- Límite de 9 caracteres en el display (punto y signo cuentan)
+- Muestra `ERROR` para resultados negativos o mayores a 999,999,999
+- Punto decimal
+- Botón `+/-` para cambiar el signo
+- Decoraciones kawaii animadas ✨
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Correr el proyecto
+
+```bash
+bun install
+bun run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Comandos disponibles
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+bun run dev          # servidor local en localhost:5173
+bun test             # correr todos los tests
+bun run lint         # verificar estilo de código
+bun run storybook    # storybook en localhost:6006
+bun run build        # build de producción
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Estructura
+
+```
+src/
+├── calculator/
+│   └── buttons.ts        # definición de botones
+├── components/
+│   ├── Calculator.tsx
+│   ├── Display.tsx
+│   ├── Button.tsx
+│   ├── ButtonGrid.tsx
+│   └── Decorations.tsx
+├── hooks/
+│   └── useCalculator.ts  # toda la lógica
+├── stories/
+│   ├── Button.stories.ts
+│   ├── Display.stories.ts
+│   └── Calculator.stories.ts
+└── tests/
+    └── useCalculator.test.ts
 ```
